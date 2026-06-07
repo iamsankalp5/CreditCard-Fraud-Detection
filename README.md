@@ -1,12 +1,9 @@
 # Credit Card Fraud Detection and Risk Analysis
 
-# Credit Card Fraud Detection and Risk Analysis
 
 ## Dashboard Preview
 
 ![Dashboard](Project%20Dashboard%20.jpg)
-
-## Project Overview
 
 ## Project Overview
 
