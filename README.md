@@ -1,175 +1,213 @@
-# 💳 Credit Card Fraud Detection
+# Credit Card Fraud Detection and Risk Analysis
 
-## Objective
-Develop a model to identify fraudulent credit card transactions in real-time. To detect fraudulent credit card transactions using data analysis and visualization techniques. The project covers data collection, cleaning, exploratory data analysis (EDA), and building interactive Power BI dashboards.
+## Project Overview
 
----
-
-## Task 1: Dataset Used
-
-* **Dataset Name:** Credit Card Fraud Detection
-* **Source:** Kaggle
-* **Link:** [Kaggle Dataset](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
-* **Format:** `.csv`
-
-### Description
-
-* **Rows:** 284,807
-* **Columns:** 31
-* **Target Column:** `class` (0 = Normal, 1 = Fraud)
-* **Features:** `V1` to `V28` (PCA components), `time`, `amount`
-* **Goal:** Identify transaction patterns and detect fraudulent activities.
+This project focuses on analyzing credit card transaction data to identify suspicious and potentially fraudulent activities. The workflow includes data acquisition, database integration, data cleansing, exploratory analysis, and interactive dashboard development using Power BI. The objective is to uncover fraud-related patterns and provide insights that can support fraud prevention strategies.
 
 ---
 
-##  Task 2: Data Collection and Preparation
+## Dataset Information
 
-**Tools Used:** PostgreSQL, Python (Pandas), Power BI
+**Dataset:** Credit Card Fraud Detection Dataset
 
-### ✅ 1. Dataset Identification and Collection
+**Source:** Kaggle
 
-* Downloaded from Kaggle
-* Format: `creditcard.csv`
-* ✅ **Deliverable:** `.csv` file confirmed
+**File Format:** CSV
 
-### ✅ 2. Data Import into SQL Database
+### Dataset Characteristics
 
-* Tool: **PostgreSQL**
-* Table: `cc_data`
-* Schema created using appropriate data types (`FLOAT`, `INT`)
-* Data imported using `SQLAlchemy` in Python
-* No normalization needed (flat table)
+* Total Transactions: 284,807
+* Total Attributes: 31
+* Target Variable: `Class`
 
-✅ **Deliverable:** Data stored and accessible via PostgreSQL
+  * 0 → Legitimate Transaction
+  * 1 → Fraudulent Transaction
+* Features:
 
-### ✅ 3. Initial SQL Data Profiling
+  * PCA-transformed variables (V1–V28)
+  * Transaction Time
+  * Transaction Amount
 
-* Queried to find:
+### Project Goal
 
-  * Total Records: `284,807`
-  * Null Values: `0`
-  * Duplicate Rows: `1,854`
-  * Data Types: All numerical
-* ✅ **Deliverable:** Profiling complete with scripts and findings
-
-### ✅ 4. Data Cleaning and Transformation
-
-* **In SQL:**
-
-  * Checked for nulls, duplicates, formatting issues
-
-* **In Python (Pandas):**
-
-  * Loaded using `read_sql_query`
-  * Dropped duplicates from class `0` only
-  * Kept all fraud class records
-  * Converted and renamed where needed
-
-✅ **Deliverable:** Cleaned DataFrame with `283,745` records exported as `cleaned_dataset.csv`
-
-### ✅ 5. Data Validation
-
-* Row count in SQL matched Python
-* Verified class distribution, stats, and consistency
-
-✅ **Deliverable:** Clean dataset ready for Power BI analysis
+Analyze transaction behavior, identify fraud-related trends, and create visual reports that assist in monitoring financial risk.
 
 ---
 
-## 📊 Task 3: EDA and Visualization
+# Data Acquisition and Preparation
 
-**Tools Used:** Python (Seaborn, Matplotlib), Power BI
+### Technologies Used
 
-### 🔹 1. Summary Statistics
+* PostgreSQL
+* Python (Pandas, SQLAlchemy)
+* Power BI
 
-* Used `.describe()` and `value_counts()`
-* Mean amount: ₹88.35
-* Fraud Rate: **0.173%**
+### Dataset Collection
 
-### 🔹 2. Univariate Analysis
+The transaction dataset was obtained from Kaggle and imported for further processing and analysis.
 
-* Countplots of class distribution
-* Histograms for `amount`, `time`
-* Noticed skewed transaction frequency toward smaller amounts
+### Database Integration
 
-### 🔹 3. Bivariate/Multivariate Analysis
+The dataset was loaded into PostgreSQL using SQLAlchemy. A structured table was created with suitable numerical data types to store transaction records efficiently.
 
-* Boxplots for `amount` and `time` vs `class`
-* Correlation plot shows features like `V11`, `V4`, `V14`, `V10` strongly linked to fraud
+### Data Profiling
 
-### 🔹 4. Outlier & Anomaly Detection
+Initial database assessment was performed to evaluate data quality.
 
-* Outliers identified via boxplots in selected features
-* **Decision:** Keep outliers—they might be actual fraud cases
+**Findings:**
 
-### 🔹 5. Power BI Dashboard
+* Total Records: 284,807
+* Missing Values: None
+* Duplicate Records: 1,854
+* Feature Types: Numerical
 
-* Imported `cleaned_dataset.csv`
-* Built dashboard with:
+### Data Cleaning
 
-  * **KPIs:** Total Transactions, Fraud %, Avg. Amount
-  * **Visuals:** Bar charts, histograms, filters by amount/time/class
-  * **Final Clean Data Stats:**
+Data quality checks were performed in both PostgreSQL and Python.
 
-    * Records: 283,745
-    * Normal: 283,253
-    * Fraud: 492
-    * Fraud Rate: 0.1734%
+Actions completed:
 
-✅ **Deliverables:**
+* Verified absence of null values
+* Identified duplicate transactions
+* Removed duplicate records from non-fraudulent transactions
+* Retained all fraud-related records
+* Standardized dataset structure for analysis
 
-* creditcard_project(`.ipynb`)
-* Power BI file (`.pbix`)
-* Summary: Clean, imbalanced dataset with high fraud-risk anomaly zones
+### Validation Process
 
----
+Several validation checks ensured data consistency between PostgreSQL and Python environments.
 
-## ✅ Task 4: Conclusion and Recommendations
+Final cleaned dataset:
 
-###  Key Insights Summary
-
-* Dataset is **heavily imbalanced**
-* Fraudulent transactions tend to occur in small amounts and within narrow time frames
-* Strong correlations found in certain PCA components
-
-### Business Implications
-
-* Even small-value frauds can accumulate into significant losses
-* Real-time systems should prioritize transactions matching fraud profiles
-
-### Recommendations
-
-1. **Deploy anomaly detection models** using top correlated features
-2. **Monitor small transactions more closely**
-3. **Use real-time dashboards** in Power BI to trigger fraud alerts
-4. **Update dataset regularly** and retrain models
-
-### Next Steps
-
-* Build **predictive ML model** 
-* Automate **Power BI data refresh**
-* Integrate with **live transaction feeds**
-
-✅ **Deliverable:**
-
-* `Power BI snapshots`
-  
-![dashboard](https://github.com/user-attachments/assets/43d96f8c-fa23-42a1-9e7f-7b3669c2ee47)
-
+* Total Transactions: 283,745
+* Legitimate Transactions: 283,253
+* Fraudulent Transactions: 492
 
 ---
 
-## Files in This Repository
+# Exploratory Data Analysis (EDA)
 
-| File Name              | Description                              |
-| ---------------------- | ---------------------------------------- |
-| `creditcard.csv`       | Original dataset from Kaggle             |
-| `cleaned_dataset.csv`  | Cleaned dataset used for visualization   |
-| `CC_Project.sql`  | Original Dataset import into Postgresql   |
-| `creditcard_project.ipynb`   | Exploratory data analysis in Jupyter     |
-| `CreditCardFraudDetection_Dashboard.pbix` | Power BI interactive dashboard           |
-| `README.md`            | GitHub project documentation (this file) |
+### Descriptive Statistics
 
-## Author
-Malini Roy Choudhury - Data Analyst | Freelancer
+Basic statistical measures were generated to understand transaction behavior.
 
+**Highlights:**
+
+* Average Transaction Amount: ₹88.35
+* Fraud Occurrence Rate: 0.173%
+
+### Distribution Analysis
+
+The distribution of transaction amounts, transaction times, and fraud classes was examined using visualizations such as histograms and count plots.
+
+**Observations:**
+
+* Most transactions involved relatively small amounts.
+* Fraud cases represented a very small portion of the dataset.
+
+### Relationship Analysis
+
+Comparative analysis was conducted between fraudulent and legitimate transactions.
+
+Techniques used:
+
+* Box Plots
+* Correlation Analysis
+* Feature Comparison
+
+Several transformed variables, including V4, V10, V11, and V14, showed stronger associations with fraudulent behavior.
+
+### Outlier Investigation
+
+Potential anomalies were detected through visualization methods.
+
+Rather than removing these values, they were preserved because unusual transaction patterns often indicate fraudulent activity.
+
+---
+
+# Power BI Dashboard Development
+
+The cleaned dataset was imported into Power BI to create an interactive fraud-monitoring dashboard.
+
+### Dashboard Components
+
+#### Key Performance Indicators (KPIs)
+
+* Total Transactions
+* Fraud Percentage
+* Average Transaction Amount
+
+#### Visual Analytics
+
+* Transaction Distribution Charts
+* Fraud vs Legitimate Transaction Comparison
+* Amount-Based Analysis
+* Time-Based Analysis
+* Interactive Filters and Slicers
+
+### Final Dataset Summary
+
+| Metric                  | Value   |
+| ----------------------- | ------- |
+| Total Records           | 283,745 |
+| Legitimate Transactions | 283,253 |
+| Fraudulent Transactions | 492     |
+| Fraud Rate              | 0.1734% |
+
+---
+
+# Findings and Business Insights
+
+### Key Observations
+
+* Fraudulent transactions account for a very small percentage of overall activity.
+* Certain PCA-derived variables exhibit stronger fraud-related signals.
+* Fraud activity frequently appears within specific transaction amount ranges and time windows.
+* The dataset demonstrates a significant class imbalance, making fraud detection a challenging task.
+
+### Business Impact
+
+Even low-value fraudulent transactions can generate substantial cumulative financial losses. Early identification of suspicious behavior is therefore essential for reducing risk exposure.
+
+---
+
+# Recommendations
+
+* Implement anomaly detection systems using highly correlated fraud indicators.
+* Increase monitoring for transactions exhibiting known fraud characteristics.
+* Utilize real-time dashboard reporting for continuous fraud surveillance.
+* Refresh analytical models regularly as new transaction data becomes available.
+* Establish automated alert mechanisms for high-risk transactions.
+
+---
+
+# Future Enhancements
+
+* Develop machine learning models for predictive fraud detection.
+* Enable automated Power BI data refresh workflows.
+* Integrate the solution with live transaction streams for real-time monitoring.
+* Explore advanced classification techniques to improve fraud detection accuracy.
+
+---
+
+# Repository Contents
+
+| File                                    | Description                               |
+| --------------------------------------- | ----------------------------------------- |
+| creditcard_project.ipynb                | Data exploration and analysis notebook    |
+| CC_Project.sql                          | PostgreSQL scripts used for data handling |
+| CreditCardFraudDetection_Dashboard.pbix | Interactive Power BI dashboard            |
+| Project Dashboard.jpg                   | Dashboard snapshot                        |
+| creditcard_project.pdf                  | Detailed project report                   |
+| README.md                               | Project documentation                     |
+
+---
+
+## Conclusion
+
+This project demonstrates an end-to-end fraud analytics workflow, covering data preparation, validation, exploratory analysis, and dashboard reporting. The insights generated can support financial institutions in strengthening fraud monitoring processes and improving risk management capabilities.
+
+
+
+Author
+Sankalp
