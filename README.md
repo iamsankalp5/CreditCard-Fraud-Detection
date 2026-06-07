@@ -1,5 +1,13 @@
 # Credit Card Fraud Detection and Risk Analysis
 
+# Credit Card Fraud Detection and Risk Analysis
+
+## Dashboard Preview
+
+![Dashboard](Project%20Dashboard%20.jpg)
+
+## Project Overview
+
 ## Project Overview
 
 This project focuses on analyzing credit card transaction data to identify suspicious and potentially fraudulent activities. The workflow includes data acquisition, database integration, data cleansing, exploratory analysis, and interactive dashboard development using Power BI. The objective is to uncover fraud-related patterns and provide insights that can support fraud prevention strategies.
